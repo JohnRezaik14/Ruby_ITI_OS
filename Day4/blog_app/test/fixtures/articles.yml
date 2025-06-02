@@ -1,0 +1,22 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# == Schema Information
+#
+# Table name: articles
+#
+#  id            :integer          not null, primary key
+#  body          :text
+#  img           :string
+#  reports_count :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+one:
+  body: MyText
+  img: MyString
+  reports_count: 1
+
+two:
+  body: MyText
+  img: MyString
+  reports_count: 1
