@@ -1,12 +1,13 @@
-<% content_for :title, "Editing article" %>
+<% content_for :title, "Edit Article" %>
 
-<h1>Editing article</h1>
+<div class="container mx-auto px-4 py-8">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-4">Edit Article</h1>
+  </div>
 
-<%= render "form", article: @article %>
+  <%= render "form", article: @article %>
 
-<br>
-
-<div>
-  <%= link_to "Show this article", @article %> |
-  <%= link_to "Back to articles", articles_path %>
+  <div class="mt-6 flex justify-center space-x-4">
+    <%= link_to "View Article", @article, class: "text-blue-500 hover:text-blue-700" %>
+  </div>
 </div>

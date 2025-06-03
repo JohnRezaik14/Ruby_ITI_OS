@@ -8,21 +8,48 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div>
+          <%= link_to "Blog App", root_path, class: "navbar-brand" %>
+        </div>
+        
+        <div class="navbar-nav">
+          <% if user_signed_in? %>
+            <%= link_to "New Article", new_article_path, class: "btn btn-primary" %>
+            <div class="user-menu">
+              <span class="user-email"><%= current_user.email %></span>
+              <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+            </div>
+          <% else %>
+            <%= link_to "Sign In", new_user_session_path, class: "btn" %>
+            <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      <% if notice %>
+        <div class="alert alert-success">
+          <%= notice %>
+        </div>
+      <% end %>
+      
+      <% if alert %>
+        <div class="alert alert-danger">
+          <%= alert %>
+        </div>
+      <% end %>
+
       <%= yield %>
     </main>
   </body>

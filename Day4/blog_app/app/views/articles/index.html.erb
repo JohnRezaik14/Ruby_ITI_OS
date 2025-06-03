@@ -1,16 +1,33 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Articles" %>
 
-<h1>Articles</h1>
+<div class="container">
+  <header class="mb-4">
+    <h1>Articles</h1>
+  </header>
 
-<div id="articles">
-  <% @articles.each do |article| %>
-    <%= render article %>
-    <p>
-      <%= link_to "Show this article", article %>
-    </p>
-  <% end %>
+  <div class="articles-grid">
+    <% @articles.each do |article| %>
+      <article class="article-card">
+        <% if article.image? %>
+          <%= image_tag article.image.url, class: "article-image" %>
+        <% end %>
+        
+        <div class="article-content">
+          <p class="article-meta">By <%= article.user.email %></p>
+          <div class="article-body"><%= truncate(article.body, length: 150) %></div>
+          
+          <div class="article-actions">
+            <%= link_to "Read More", article_path(article), class: "btn btn-primary" %>
+            
+            <% if user_signed_in? && article.user != current_user %>
+              <%= button_to "Report", report_article_path(article), 
+                  method: :post, 
+                  class: "btn btn-danger",
+                  data: { confirm: "Are you sure you want to report this article?" } %>
+            <% end %>
+          </div>
+        </div>
+      </article>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New article", new_article_path %>

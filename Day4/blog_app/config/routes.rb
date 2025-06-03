@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  resources :articles
   devise_for :users
+  
+  resources :articles do
+    member do
+      post :report
+    end
+  end
+  
   root to: "articles#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

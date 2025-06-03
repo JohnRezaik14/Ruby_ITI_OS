@@ -5,13 +5,13 @@
   </p>
 
   <p>
-    <strong>Img:</strong>
-    <%= article.img %>
+    <% if article.image? %>
+      <strong>Img:</strong>
+      <div>
+        <%= image_tag article.image.url, style: "width:200px; height:200px;" %>
+      </div>
+    <% end %>
   </p>
-
-  <p>
-    <strong>Reports count:</strong>
-    <%= article.reports_count %>
-  </p>
+<p>want report this article ?</p>
 
 </div>
